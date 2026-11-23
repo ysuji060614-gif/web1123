@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💡 번뜩이는 발명 공작소 - 초등 6학년 실과</title>
+    <!-- Pretendard 한글 폰트 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <!-- 스타일시트 -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- 상단 고정 글로벌 헤더 -->
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="#" class="brand" onclick="App.goToStep(1); return false;">
+                <div class="brand-icon">💡</div>
+                <div class="brand-text">
+                    <h1>번뜩이는 발명 공작소</h1>
+                    <span>초등 6학년 실과 [생활 속 발명]</span>
+                </div>
+            </a>
+
+            <!-- 4단계 스텝퍼 네비게이션 -->
+            <nav class="stepper-nav">
+                <button class="step-btn active" data-step="1">
+                    <span class="step-badge">1</span>
+                    <span>💡 탐험대</span>
+                </button>
+                <button class="step-btn" data-step="2">
+                    <span class="step-badge">2</span>
+                    <span>🔍 불편 찾기</span>
+                </button>
+                <button class="step-btn" data-step="3">
+                    <span class="step-badge">3</span>
+                    <span>💥 생각 팡팡</span>
+                </button>
+                <button class="step-btn" data-step="4">
+                    <span class="step-badge">4</span>
+                    <span>🕸️ 생각 그물</span>
+                </button>
+            </nav>
+
+            <!-- 상태 및 세이브 -->
+            <div class="header-actions">
+                <div class="header-pill">
+                    <div class="pulse-dot"></div>
+                    <span id="saveStatusText">자동 저장됨</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="main-content">
+
+        <!-- ========================================================
+             [1단계: 💡 아이디어 탐험대]
+             ======================================================== -->
+        <section class="tab-pane active" id="paneStep1" data-step="1">
+            <div class="section-banner">
+                <span class="banner-badge">1단계: 영감 탐색</span>
+                <h2>💡 세상을 바꾼 16가지 천재 발명품을 구경해보자!</h2>
+                <p>
+                    "발명은 어려운 것이 아니에요! 주변의 사소한 불편함을 <strong>6가지 발명 마법(더하기, 빼기, 모양바꾸기, 반대로하기, 용도바꾸기, 크기바꾸기)</strong>으로 살짝 비틀어보면 세상을 바꾸는 멋진 물건이 탄생합니다!"
+                </p>
+            </div>
+
+            <!-- 발명 기법 필터 바 -->
+            <div class="filter-bar" id="galleryFilterBar"></div>
+
+            <!-- 16가지 발명품 갤러리 그리드 -->
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <!-- ========================================================
+             [2단계: 🔍 불편함 돋보기]
+             ======================================================== -->
+        <section class="tab-pane" id="paneStep2" data-step="2">
+            <div class="section-banner orange">
+                <span class="banner-badge">2단계: 문제 발견</span>
+                <h2>🔍 우리 생활 속 귀찮고 불편했던 순간을 찾아보자!</h2>
+                <p>훌륭한 발명은 "어라? 이거 왜 이렇게 불편하지?"라는 작은 불만과 호기심에서 시작됩니다. 내가 일상에서 직접 겪은 불편한 점을 적어보세요.</p>
+            </div>
+
+            <div class="discovery-single-layout">
+                <!-- 문제 정의 폼 -->
+                <div class="form-card">
+                    <div class="form-group">
+                        <label class="form-label">1. 어디서 겪었던 불편함인가요? (장소 선택)</label>
+                        <div class="place-chips" id="placeChips"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="inputWhen">2. 언제, 어떤 행동을 할 때였나요?</label>
+                        <input type="text" id="inputWhen" class="form-input" placeholder="예: 비 오는 날 아침 우산을 들고 교실에 들어올 때">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="inputTrouble">3. 무엇이 가장 불편하고 귀찮았나요? (핵심 문제)</label>
+                        <textarea id="inputTrouble" class="form-textarea" placeholder="예: 우산에서 빗물이 복도 바닥에 뚝뚝 떨어져 복도가 미끄럽고 바지와 옷이 축축하게 젖어요."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="inputWish">4. 어떤 점이 해결되면 참 좋겠나요? (우리의 소망)</label>
+                        <input type="text" id="inputWish" class="form-input" placeholder="예: 일회용 비닐을 안 쓰고도 빗물을 싹 닦아주거나 흡수하는 도구가 있으면 좋겠어요!">
+                    </div>
+
+                    <button class="btn-large" id="btnSaveProblem">
+                        이 불편함 해결하러 가기! (3단계 생각 팡팡) ➔
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             [3단계: 💥 생각 팡팡! 브레인스토밍]
+             ======================================================== -->
+        <section class="tab-pane" id="paneStep3" data-step="3">
+            <div class="section-banner green">
+                <span class="banner-badge">3단계: 아이디어 발산</span>
+                <h2>💥 6가지 발명 마법으로 생각을 마구마구 쏟아내자!</h2>
+                <p>맞고 틀린 생각은 없어요! 룰렛을 돌려 재미있는 힌트를 얻고, 떠오르는 생각을 알록달록 포스트잇에 자유롭게 붙여보세요.</p>
+            </div>
+
+            <div class="brainstorm-layout">
+                <!-- 좌측: 행운의 발명 룰렛 -->
+                <div class="roulette-panel">
+                    <h3 style="font-size:16px; font-weight:800; color:#1E293B;">🎲 행운의 발명 룰렛</h3>
+                    <p style="font-size:12.5px; color:#64748B; margin-top:4px;">생각이 막힐 땐 룰렛을 돌려 마법 힌트를 뽑아보세요!</p>
+
+                    <div class="roulette-wheel-wrap">
+                        <div class="roulette-pointer"></div>
+                        <canvas id="rouletteCanvas" width="220" height="220"></canvas>
+                    </div>
+
+                    <button class="btn-spin" id="btnSpinRoulette">🎲 룰렛 돌리기!</button>
+
+                    <div class="roulette-result" id="rouletteResultBox">
+                        <div class="roulette-tag" id="rouletteResultTag"></div>
+                        <div class="roulette-prompt" id="rouletteResultPrompt"></div>
+                    </div>
+                </div>
+
+                <!-- 우측: 포스트잇 보드 -->
+                <div class="board-container">
+                    <div class="board-toolbar">
+                        <div class="current-problem-pill" id="currentProblemPill">
+                            <strong>💡 해결할 불편함:</strong> 2단계에서 문제를 먼저 정해주세요!
+                        </div>
+
+                        <div class="add-note-box">
+                            <!-- 색상 선택 -->
+                            <div class="color-picker">
+                                <div class="color-dot dot-yellow active" data-color="yellow" title="노랑"></div>
+                                <div class="color-dot dot-pink" data-color="pink" title="분홍"></div>
+                                <div class="color-dot dot-blue" data-color="blue" title="하늘"></div>
+                                <div class="color-dot dot-green" data-color="green" title="연두"></div>
+                            </div>
+
+                            <!-- 기법 선택 -->
+                            <select id="noteTechSelect" class="form-input" style="width:140px; padding:8px 10px;">
+                                <option value="add">➕ 더하기</option>
+                                <option value="sub">➖ 빼기</option>
+                                <option value="shape">🔄 모양바꾸기</option>
+                                <option value="reverse">🔀 반대로하기</option>
+                                <option value="use">♻️ 용도바꾸기</option>
+                                <option value="size">🔍 크기바꾸기</option>
+                            </select>
+
+                            <!-- 입력창 -->
+                            <input type="text" id="noteTextInput" class="form-input" placeholder="떠오른 아이디어를 적어보세요! (Enter로 붙이기)" style="flex-grow:1;">
+                            <button class="btn-large" id="btnAddNote" style="width:auto; padding:10px 18px; font-size:14px; white-space:nowrap;">
+                                📌 붙이기
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 포스트잇 벽 -->
+                    <div class="notes-wall" id="notesWall"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             [4단계: 🕸️ 생각 그물 (마인드맵)]
+             ======================================================== -->
+        <section class="tab-pane" id="paneStep4" data-step="4">
+            <div class="section-banner purple">
+                <span class="banner-badge">4단계: 최종 생각 그물 완성</span>
+                <h2>🕸️ 생각 그물로 아이디어를 나뭇가지처럼 연결해보자!</h2>
+                <p>중심 문제에서 6가지 발명 기법 가지가 뻗어나옵니다. 브레인스토밍한 아이디어를 가지 끝에 매달고, 노드를 드래그해 나만의 멋진 생각 그물을 완성해보세요!</p>
+            </div>
+
+            <div class="mindmap-wrapper">
+                <!-- 툴바 -->
+                <div class="mindmap-toolbar">
+                    <div class="mindmap-controls">
+                        <button class="btn-icon" id="btnZoomIn" title="확대">🔍+</button>
+                        <button class="btn-icon" id="btnZoomOut" title="축소">🔍-</button>
+                        <button class="btn-secondary" id="btnResetMindmap" style="padding:6px 14px; font-size:13px;">
+                            🔄 제자리로 맞춤
+                        </button>
+                    </div>
+
+                    <div style="font-size:12.5px; color:#64748B;">
+                        💡 <strong>사용 팁:</strong> 노드를 드래그해 옮길 수 있고, 노드를 <strong>더블클릭</strong>하면 글자를 고칠 수 있어요!
+                    </div>
+
+                    <!-- 생각 그물 산출물 내보내기 액션 -->
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn-large" id="btnExportMindmap" style="background:#10B981; width:auto; padding:8px 18px; font-size:13.5px;">
+                            🖼️ 생각 그물 이미지(PNG) 저장
+                        </button>
+                        <button class="btn-secondary" id="btnSaveJson" style="font-size:12.5px;" title="작업 파일 백업">
+                            💾 백업
+                        </button>
+                        <label class="btn-secondary" style="font-size:12.5px; cursor:pointer;" title="작업 파일 불러오기">
+                            📂 불러오기
+                            <input type="file" id="jsonFileInput" accept=".json" style="display:none;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 캔버스 영역 -->
+                <div class="canvas-area" id="canvasArea">
+                    <div id="mindmapWorld" style="position:absolute; width:100%; height:100%;">
+                        <svg id="mindmapSvg"></svg>
+                        <div id="mindmapNodesContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 1단계 카드 상세 모달 팝업 -->
+    <div class="modal-overlay" id="itemModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">아이디어 상세 보기</h3>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-img-wrap">
+                    <img id="modalImg" src="" alt="아이디어 사진">
+                </div>
+
+                <div style="margin-bottom:12px;">
+                    <span id="modalTechBadge" class="technique-badge badge-add">기법 배지</span>
+                </div>
+
+                <div class="modal-box">
+                    <div class="modal-box-label">🔍 어떤 불편함이 있었나요? (Before)</div>
+                    <div class="modal-box-text" id="modalBefore"></div>
+                </div>
+
+                <div class="modal-box">
+                    <div class="modal-box-label">💡 어떻게 해결했나요? (After)</div>
+                    <div class="modal-box-text" id="modalAfter"></div>
+                </div>
+
+                <div class="modal-box" style="background:#FEF3C7; border-color:#FDE68A;">
+                    <div class="modal-box-label" style="color:#B45309;">✨ 왜 천재적인 발명일까요?</div>
+                    <div class="modal-box-text" id="modalGenius" style="font-weight:700;"></div>
+                </div>
+
+                <div style="text-align:center; margin-top:18px;">
+                    <button class="btn-large" id="modalPickTechBtn" style="background:var(--primary); width:100%;">
+                        이 기법으로 나도 아이디어 내볼래! (3단계로 가기) ➔
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 스크립트 파일들 로드 (1~4단계에 집중) -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/gallery.js"></script>
+    <script src="assets/js/problem.js"></script>
+    <script src="assets/js/brainstorm.js"></script>
+    <script src="assets/js/mindmap.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

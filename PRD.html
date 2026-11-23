@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>초등 6학년 발명 공작소 - 제품 기획서 (PRD)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #EEF2FF;
+            --accent-add: #FF6B4A;
+            --accent-sub: #0284C7;
+            --accent-shape: #10B981;
+            --accent-reverse: #8B5CF6;
+            --accent-use: #059669;
+            --accent-size: #EC4899;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* 헤더 배너 */
+        .header-banner {
+            background: linear-gradient(135deg, #4338CA 0%, #6366F1 50%, #818CF8 100%);
+            color: white;
+            padding: 48px 40px;
+            border-radius: 24px;
+            margin-bottom: 36px;
+            box-shadow: 0 20px 25px -5px rgba(67, 56, 202, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-banner::after {
+            content: "💡";
+            position: absolute;
+            right: 40px;
+            bottom: -15px;
+            font-size: 140px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .tag-pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .header-banner h1 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .header-banner p {
+            font-size: 16px;
+            opacity: 0.95;
+            max-width: 720px;
+            line-height: 1.7;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            .header-banner { padding: 32px 24px; }
+            .header-banner h1 { font-size: 26px; }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 32px;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1E293B;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        /* 6가지 발명기법 카드 */
+        .technique-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            border: 2px solid transparent;
+            transition: all 0.25s ease;
+        }
+
+        .technique-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -5px rgba(0,0,0,0.08);
+        }
+
+        .tech-add { border-color: #FED7AA; background: #FFF7ED; }
+        .tech-sub { border-color: #BAE6FD; background: #F0F9FF; }
+        .tech-shape { border-color: #A7F3D0; background: #ECFDF5; }
+        .tech-reverse { border-color: #DDD6FE; background: #F5F3FF; }
+        .tech-use { border-color: #BBF7D0; background: #F0FDF4; }
+        .tech-size { border-color: #FBCFE8; background: #FDF2F8; }
+
+        .technique-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 15px;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .badge-add { background: var(--accent-add); }
+        .badge-sub { background: var(--accent-sub); }
+        .badge-shape { background: var(--accent-shape); }
+        .badge-reverse { background: var(--accent-reverse); }
+        .badge-use { background: var(--accent-use); }
+        .badge-size { background: var(--accent-size); }
+
+        .technique-card h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .technique-card p {
+            font-size: 14px;
+            color: #475569;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .technique-example {
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px dashed rgba(0, 0, 0, 0.15);
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        /* 4단계 수업 플로우 */
+        .step-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background: #F1F5F9;
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 6px solid var(--primary);
+        }
+
+        .step-num {
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #0F172A;
+        }
+
+        .step-content p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* 16가지 사례 미리보기 갤러리 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+
+        .item-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px -4px rgba(0,0,0,0.08);
+        }
+
+        .item-thumb {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            background: #000;
+        }
+
+        .item-body {
+            padding: 14px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .item-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #1E293B;
+            margin-bottom: 6px;
+        }
+
+        .item-desc {
+            font-size: 12.5px;
+            color: #64748B;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .mini-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            color: white;
+            align-self: flex-start;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            font-size: 17px;
+            font-weight: 800;
+            padding: 16px 36px;
+            border-radius: 14px;
+            text-decoration: none;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #4338CA;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 헤더 배너 -->
+    <header class="header-banner">
+        <span class="tag-pill">초등학교 6학년 실과 [생활 속 발명] 단원 연계 (4단계 완결형)</span>
+        <h1>💡 초등 6학년을 위한 인터랙티브 발명 공작소</h1>
+        <p>
+            "발명은 어려운 것이 아니에요! 주변의 사소한 불편함을 <strong>6가지 발명 마법(더하기, 빼기, 모양바꾸기, 반대로하기, 용도바꾸기, 크기바꾸기)</strong>으로 살짝 비틀어보면 세상을 바꾸는 멋진 생각 그물이 완성됩니다!"
+        </p>
+    </header>
+
+    <!-- 6대 발명기법 카드 섹션 -->
+    <section class="card">
+        <h2>✨ 우리가 사용할 6가지 발명 기법 (6학년 맞춤)</h2>
+        <div class="grid-3">
+            <div class="technique-card tech-add">
+                <span class="technique-badge badge-add">➕ 1. 더하기</span>
+                <h3>합쳐서 두 배로 편리하게!</h3>
+                <p>원래 있던 물건에 다른 물건이나 편리한 기능을 하나 더 붙여요.</p>
+                <div class="technique-example">💡 예: 쇼핑카트 + 계산기, 연필 + 지우개</div>
+            </div>
+
+            <div class="technique-card tech-sub">
+                <span class="technique-badge badge-sub">➖ 2. 빼기</span>
+                <h3>불필요한 것은 쏙 빼요!</h3>
+                <p>걸리적거리거나 불편했던 부품, 번거로운 과정을 없애요.</p>
+                <div class="technique-example">💡 예: 줄 없는 줄넘기, 투명창 형광펜</div>
+            </div>
+
+            <div class="technique-card tech-shape">
+                <span class="technique-badge badge-shape">🔄 3. 모양바꾸기</span>
+                <h3>모양을 꺾고 파내요!</h3>
+                <p>구조나 형태를 살짝 변형해서 불편함을 싹 해결해요.</p>
+                <div class="technique-example">💡 예: 가방 걸이 홈 파인 의자, 굽는 빨대</div>
+            </div>
+
+            <div class="technique-card tech-reverse">
+                <span class="technique-badge badge-reverse">🔀 4. 반대로하기</span>
+                <h3>거꾸로 뒤집어 생각해요!</h3>
+                <p>위아래, 안팎, 방향이나 순서를 거꾸로 바꾸어 봐요.</p>
+                <div class="technique-example">💡 예: 테이블로 뒤집히는 벤치, 거꾸로 케첩통</div>
+            </div>
+
+            <div class="technique-card tech-use">
+                <span class="technique-badge badge-use">♻️ 5. 용도바꾸기</span>
+                <h3>원래 용도를 다른 용도로!</h3>
+                <p>물건의 원래 용도를 다른 용도로 바꾸어 만듭니다.</p>
+                <div class="technique-example">💡 예: 장화를 화분으로 쓰기, 주전자를 물뿌리개로 쓰기</div>
+            </div>
+
+            <div class="technique-card tech-size">
+                <span class="technique-badge badge-size">🔍 6. 크기바꾸기</span>
+                <h3>작게 줄이거나 크게 늘려요!</h3>
+                <p>크기를 아주 작게 줄여서 휴대하거나 엄청 크게 키워요.</p>
+                <div class="technique-example">💡 예: 휴지심 속에 쏙 넣은 미니 휴지</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4단계 수업 활동 시나리오 -->
+    <section class="card">
+        <h2>🚀 4단계 수업 활동 흐름 (완결형)</h2>
+        <div class="step-timeline">
+            <div class="step-item">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h4>1단계: 💡 아이디어 탐험대</h4>
+                    <p>유튜브 UI가 깨끗이 제거된 16가지 천재 발명품 사진을 구경하고, 6가지 발명 기법이 어떻게 쓰였는지 탐색합니다.</p>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h4>2단계: 🔍 불편함 돋보기</h4>
+                    <p>학교, 집, 화장실, 비 오는 날 등 내가 일상에서 직접 겪었던 귀찮고 불편했던 상황을 3문장 문장완성기로 집중 정리합니다.</p>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h4>3단계: 💥 생각 팡팡! 브레인스토밍</h4>
+                    <p><strong>발명 룰렛 🎲</strong>을 돌려 당첨된 기법 힌트를 보며, 알록달록 가상 포스트잇에 떠오르는 아이디어를 자유롭게 붙입니다.</p>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h4>4단계: 🕸️ 생각 그물 (마인드맵 최종 완성)</h4>
+                    <p>중심 문제에서 6가지 발명 기법 가지가 뻗어나오며, 아이디어를 나뭇가지처럼 연결하여 <strong>멋진 생각 그물 이미지(PNG)</strong>로 저장합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDF 속 16개 실제 발명품 사례 갤러리 -->
+    <section class="card">
+        <h2>📸 PDF 속 16가지 천재 발명품 레퍼런스 (크롭 완료)</h2>
+        <div class="gallery-grid">
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/01_쇼핑카트에_계산기.png" alt="쇼핑카트에 계산기">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">01. 쇼핑카트에 계산기</div>
+                        <div class="item-desc">카트 손잡이에 계산기를 달아 과소비 방지</div>
+                    </div>
+                    <span class="mini-badge badge-add">➕ 더하기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/02_직원들이_붙지_않는_장바구니.png" alt="장바구니">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">02. 의사표현 장바구니</div>
+                        <div class="item-desc">색상으로 직원의 부담스러운 응대 제거</div>
+                    </div>
+                    <span class="mini-badge badge-sub">➖ 빼기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/03_주인과_개가_함께_마실수있는_음수대.png" alt="음수대">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">03. 사람·반려견 겸용 음수대</div>
+                        <div class="item-desc">음수대 물받이의 원래 용도를 반려견 음수대로 전환</div>
+                    </div>
+                    <span class="mini-badge badge-use">♻️ 용도바꾸기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/04_가방이_안_흘러내리는_의자.png" alt="의자">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">04. 가방 안 떨어지는 의자</div>
+                        <div class="item-desc">등받이 모서리에 홈을 파 가방 끈 고정</div>
+                    </div>
+                    <span class="mini-badge badge-shape">🔄 모양바꾸기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/05_파먹기_편리한_숟가락.png" alt="숟가락">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">05. 톱니 스푼</div>
+                        <div class="item-desc">숟가락 가장자리를 톱니로 가공해 과육 분리</div>
+                    </div>
+                    <span class="mini-badge badge-add">➕ 더하기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/06_충전_가능_건전지.png" alt="건전지">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">06. USB 충전 건전지</div>
+                        <div class="item-desc">건전지에 USB 포트를 결합하여 재충전</div>
+                    </div>
+                    <span class="mini-badge badge-add">➕ 더하기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/07_테이블도_되는_벤치.png" alt="벤치">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">07. 테이블 변신 벤치</div>
+                        <div class="item-desc">중앙 등받이를 뒤집어 테이블로 전환</div>
+                    </div>
+                    <span class="mini-badge badge-reverse">🔀 반대로하기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/08_바닥에_묻지_않는_뒤집개.png" alt="뒤집개">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">08. 공중부양 뒤집개</div>
+                        <div class="item-desc">손잡이 아래 돌기를 달아 조리대 오염 방지</div>
+                    </div>
+                    <span class="mini-badge badge-shape">🔄 모양바꾸기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/09_닫을_수_있는_노트북_캠.png" alt="노트북 캠">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">09. 닫을 수 있는 노트북 캠</div>
+                        <div class="item-desc">슬라이딩 물리 셔터로 사생활 보호</div>
+                    </div>
+                    <span class="mini-badge badge-add">➕ 더하기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/10_바람_넣을_필요_없는_자전거_바퀴.png" alt="자전거 바퀴">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">10. 펑크 없는 자전거 바퀴</div>
+                        <div class="item-desc">공기 튜브 대신 벌집 모양 탄성 구조 적용</div>
+                    </div>
+                    <span class="mini-badge badge-shape">🔄 모양바꾸기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/11_김_서림_방지_거울.png" alt="거울">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">11. 김 서림 방지 거울</div>
+                        <div class="item-desc">거울 뒷면에 열선 패드를 결합하여 김 서림 방지</div>
+                    </div>
+                    <span class="mini-badge badge-add">➕ 더하기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/12_벤치_겸_울타리.png" alt="울타리">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">12. 벤치 겸 울타리</div>
+                        <div class="item-desc">안전 난간과 좌석을 일체형으로 통합</div>
+                    </div>
+                    <span class="mini-badge badge-add">➕ 더하기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/13_신호등_남은_시간_표시.png" alt="신호등">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">13. 신호등 남은 시간 표시</div>
+                        <div class="item-desc">차량 신호등에 카운트다운 숫자를 더함</div>
+                    </div>
+                    <span class="mini-badge badge-add">➕ 더하기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/14_형광펜_칠할_곳_확인_가능.png" alt="형광펜">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">14. 투명창 형광펜</div>
+                        <div class="item-desc">촉 중앙을 비워 밑줄 그을 글자를 확인</div>
+                    </div>
+                    <span class="mini-badge badge-sub">➖ 빼기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/15_휴지_속_여분_휴지.png" alt="휴지">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">15. 휴지 속 미니 휴지</div>
+                        <div class="item-desc">휴지심 빈 공간에 쏙 들어가는 미니 롤</div>
+                    </div>
+                    <span class="mini-badge badge-size">🔍 크기바꾸기</span>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img class="item-thumb" src="assets/images/captures/16_손_씻은_물_바로_재사용.png" alt="변기 세면대">
+                <div class="item-body">
+                    <div>
+                        <div class="item-title">16. 손 씻은 물 재사용 변기</div>
+                        <div class="item-desc">변기 수조 뚜껑을 손 씻는 세면대 용도로 전환</div>
+                    </div>
+                    <span class="mini-badge badge-use">♻️ 용도바꾸기</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="actions">
+        <button class="btn-primary" onclick="window.print()">🖨️ PRD 문서 인쇄 / PDF 저장</button>
+    </div>
+</div>
+
+</body>
+</html>
